@@ -61,9 +61,8 @@ public class FirebaseController : MonoBehaviour
         yield return _dbRef.Child("Games").Child(_key).Child("GameDetails").SetRawJsonValueAsync(JsonUtility.ToJson(game));
 
 
-        PlayerDetails p1 = new PlayerDetails(player1, "", "", "blueCircle");
+        PlayerDetails p1 = new PlayerDetails(player1, "", "");
         yield return _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player1").SetRawJsonValueAsync(JsonUtility.ToJson(p1));
-        //_Player1ID = _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player1").Push().Key;
 
 
         PlayerDetails p2 = new PlayerDetails();
@@ -87,7 +86,7 @@ public class FirebaseController : MonoBehaviour
         Debug.Log("p2 name" + _player2);
 
 
-        PlayerDetails p2 = new PlayerDetails(_player2, "", "", "redBox");
+        PlayerDetails p2 = new PlayerDetails(_player2, "", "");
         _dbRef.Child("Games").Child(key).Child("Objects").Child("Player2").SetRawJsonValueAsync(JsonUtility.ToJson(p2));
 
       
@@ -192,23 +191,18 @@ public class FirebaseController : MonoBehaviour
     //}
 
 
-    public static void UpdatePostion(int posX, int posY)
+    public static void UpdateWeapon(string weapon)
     {
         if (GameManager.gamePlayer == 1)
         {
-            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player1").Child("posX")
-                .SetValueAsync((posX.ToString()));
-
-            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player1").Child("posY")
-                .SetValueAsync((posY.ToString()));
+            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player1").Child("weapon")
+                .SetValueAsync(weapon);
         }
         else
         if (GameManager.gamePlayer == 2)
         {
-            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player2").Child("posX")
-                .SetValueAsync((posX.ToString()));
-            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player2").Child("posY")
-                .SetValueAsync((posY.ToString()));
+            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player2").Child("weapon")
+                .SetValueAsync(weapon);
         }
     }
 

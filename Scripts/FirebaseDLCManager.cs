@@ -15,62 +15,13 @@ public class FirebaseDLCManager : MonoBehaviour
         StorageReference storageRef = storage.GetReferenceFromUrl("gs://cg-assignment1-b592f.appspot.com");
         
         
-        StorageReference blueCircle = storageRef.Child("DLC").Child("blueCircle.png");
-        StorageReference redBox = storageRef.Child("DLC").Child("redBox.png");
+        StorageReference background = storageRef.Child("DLC").Child("background.jpg");
 
-        DownloadBlueImage(blueCircle);
-        DownloadRedImage(redBox);
+        DownloadBackground(background);
     }
 
 
-
-    //Download File from Firebase Storage
-    private void DownloadBlueImage(StorageReference reference)
-    {
-        
-        reference.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task => {
-            if (task.IsFaulted || task.IsCanceled)
-            {
-                Debug.LogException(task.Exception);
-                // Uh-oh, an error occurred!
-            }
-            else
-            {
-                
-                byte[] fileContents = task.Result;
-
-                // Load the image into Unity
-
-                //Create Texture
-                Texture2D blueTexture = new Texture2D(1024, 1024);
-                blueTexture.LoadImage(fileContents);
-                
-
-                //Create Sprite
-                Sprite mySprite = Sprite.Create(blueTexture, new Rect(0.0f, 0.0f, blueTexture.width, blueTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
-                GameObject blueCircle = new GameObject();
-                blueCircle.gameObject.transform.localScale = new Vector2(0.2f, 0.2f);
-                blueCircle.transform.position = new Vector2(-4f, 0f);
-
-                blueCircle.AddComponent<SpriteRenderer>().sprite = mySprite;
-                blueCircle.AddComponent<Rigidbody2D>().gravityScale = 0;
-
-
-                if (GameManager.gamePlayer == 1)
-                {
-                    blueCircle.AddComponent<PlayerController>();
-                }
-                   
-
-                blueCircle.name = "Blue Circle";
-                Debug.Log("Finished downloading blue circle!");
-            }
-        });
-
-    }
-
-    //Download File from Firebase Storage
-    private void DownloadRedImage(StorageReference reference)
+    private void DownloadBackground(StorageReference reference)
     {
         reference.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task => {
             if (task.IsFaulted || task.IsCanceled)
@@ -80,7 +31,7 @@ public class FirebaseDLCManager : MonoBehaviour
             }
             else
             {
-                
+
                 byte[] fileContents = task.Result;
 
                 // Load the image into Unity
@@ -93,11 +44,10 @@ public class FirebaseDLCManager : MonoBehaviour
                 //Create Sprite
                 Sprite mySprite = Sprite.Create(redTexture, new Rect(0.0f, 0.0f, redTexture.width, redTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
                 GameObject redBox = new GameObject();
-                redBox.gameObject.transform.localScale = new Vector2(0.2f, 0.2f);
-                redBox.transform.position = new Vector2(4f, 0f);
+                redBox.gameObject.transform.localScale = new Vector2(1.25f, 1.25f);
+                redBox.transform.position = new Vector2(0f, 0f);
 
                 redBox.AddComponent<SpriteRenderer>().sprite = mySprite;
-                redBox.AddComponent<Rigidbody2D>().gravityScale = 0;
 
                 if (GameManager.gamePlayer == 2)
                 {
@@ -105,10 +55,11 @@ public class FirebaseDLCManager : MonoBehaviour
                 }
 
 
-                redBox.name = "Red Box";
-                Debug.Log("Finished downloading red box!");
+                redBox.name = "Background";
+                Debug.Log("Finished downloading Background!");
             }
         });
 
     }
+
 }
