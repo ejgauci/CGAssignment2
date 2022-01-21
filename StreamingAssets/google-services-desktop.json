@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "939989869845",
+    "firebase_url": "https://cg-assignment1-b592f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "cg-assignment1-b592f",
+    "storage_bucket": "cg-assignment1-b592f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939989869845:android:40871fb4a6b03a2f74f51c",
+        "android_client_info": {
+          "package_name": "com.mcast.CGAssignment1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939989869845-im5pho049dl46hkgr3eaja3gp3l261p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTpS4RVlBoyY7PadU9AbUMzvO6ose3pAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939989869845-im5pho049dl46hkgr3eaja3gp3l261p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
