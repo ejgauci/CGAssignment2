@@ -32,6 +32,7 @@ public class LogicManager : MonoBehaviour
         }
 
         CompareMoves();
+        playercont.setEnemySprite();
     }
 
     public void CompareMoves()

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public int score = 0;
     public int player;
+    public int playerEn;
     
     
     //public static int gamePlayer = 1;
@@ -17,10 +18,18 @@ public class PlayerController : MonoBehaviour
 
     public GameObject PlayerObject;
     public SpriteRenderer playerSR;
-    public Sprite MyIdle;
-    public Sprite MyRock;
-    public Sprite MyPaper;
-    public Sprite MyScissors;
+
+    public GameObject EnemyObject;
+    public SpriteRenderer enemySR;
+    
+
+    public Sprite myRock;
+    public Sprite myPaper;
+    public Sprite myScissors;
+
+    public Sprite enRock;
+    public Sprite enPaper;
+    public Sprite enScissors;
 
 
 
@@ -28,12 +37,25 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         player = GameManager.gamePlayer;
+        if (player == 1)
+        {
+            playerEn = 2;
+        }
+        else
+        {
+            playerEn = 1;
+        }
+        
         PlayerObject = GameObject.FindGameObjectWithTag("Player"+player);
         playerSR = PlayerObject.GetComponent<SpriteRenderer>();
 
-        if (player == 2)
+        EnemyObject = GameObject.FindGameObjectWithTag("Player" + playerEn);
+        enemySR = EnemyObject.GetComponent<SpriteRenderer>();
+
+
+        //if (player == 2)
         {
-            playerSR.flipX = true;
+          //  playerSR.flipX = true;
         }
 
         GetEnemyWeapon_Firebase();
@@ -43,8 +65,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
-       
-
         if (score == 2)
         {
             FirebaseController.WonGame();
@@ -80,23 +100,42 @@ public class PlayerController : MonoBehaviour
         if (weapon == "Rock")
         {
             //Rock
-            playerSR.sprite = MyRock;
+            playerSR.sprite = myRock;
             
         }
         else if (weapon == "Paper")
         {
             //paper
-            playerSR.sprite = MyPaper;
+            playerSR.sprite = myPaper;
         }
         else if (weapon == "Scissors")
         {
             //scissors
-            playerSR.sprite = MyScissors;
+            playerSR.sprite = myScissors;
+        }
+        
+    }
+    public void setEnemySprite()
+    {
+        if (enWeapon == "Rock")
+        {
+            //Rock
+            enemySR.sprite = enRock;
+
+        }
+        else if (enWeapon == "Paper")
+        {
+            //paper
+            enemySR.sprite = enPaper;
+        }
+        else if (enWeapon == "Scissors")
+        {
+            //scissors
+            enemySR.sprite = enScissors;
         }
 
-       
     }
-    
+
     public void GetEnemyWeapon_Firebase()
     {
         FirebaseController.getEnemyWeapon();
