@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     //public static int gamePlayer = 1;
 
     public string weapon = "";
+    public static string enWeapon = "";
 
     public GameObject PlayerObject;
     public SpriteRenderer playerSR;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         if (player == 2)
         {
-            Flip();
+            playerSR.flipX = true;
         }
     }
 
@@ -93,13 +94,18 @@ public class PlayerController : MonoBehaviour
 
        
     }
-
     
-    public void Flip()
+    public void GetEnemyWeapon()
     {
-        //flip
-        playerSR.flipX = true;
+        FirebaseController.getEnemyWeapon();
+        
     }
+
+    public static void setEnWeapon(string weapon)
+    {
+        enWeapon = weapon;
+    }
+
 }
 
 

@@ -72,12 +72,11 @@ public class FirebaseController : MonoBehaviour
         //Listen to any changes in this lobby
         _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player2").ValueChanged += HandleValueChanged;
         GameManager.NextScene("Lobby");
-
-
         
 
-
     }
+
+
 
     public static void AddToLobby(string key)
     {
@@ -130,8 +129,6 @@ public class FirebaseController : MonoBehaviour
 
         GameDetails game = new GameDetails("true", "");
         yield return _dbRef.Child("Games").Child(_key).Child("GameDetails").SetRawJsonValueAsync(JsonUtility.ToJson(game));
-
- 
         
 
     }
@@ -221,6 +218,42 @@ public class FirebaseController : MonoBehaviour
         }
     }
 
+
+    private static int enemyNumber = 0;
+    public static string _enemyWeapon;
+    public static void getEnemyWeapon()
+    {
+        Debug.Log("get enemy weapon");
+        FirebaseDatabase.DefaultInstance.GetReference("Games").ValueChanged += FirebaseController_GetWeapon;
+    }
+
+    private static void FirebaseController_GetWeapon(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError("error msg");
+            return;
+        }
+        else
+        {
+            if (GameManager.gamePlayer == 1)
+            {
+                enemyNumber = 2;
+            }
+            else
+            if (GameManager.gamePlayer == 2)
+            {
+                enemyNumber = 1;
+            }
+
+            _enemyWeapon = e.Snapshot.Child(_key).Child("Objects").Child("Player"+ enemyNumber).Child("weapon").GetValue(true).ToString();
+        }
+
+        Debug.Log("Enemy Weapon:" + _enemyWeapon);
+        PlayerController.setEnWeapon(_enemyWeapon);
+
+    }
+    
 
 
 }
