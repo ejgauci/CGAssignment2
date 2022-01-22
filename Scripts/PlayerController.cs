@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
 
 
     public CanvasManager cm;
-
+    public LogicManager lm;
+    
 
     // Start is called before the first frame update
     private void Start()
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (score == 2)
         {
             FirebaseController.WonGame();
@@ -83,7 +84,13 @@ public class PlayerController : MonoBehaviour
         FirebaseController.UpdateWeapon("Rock");
 
         setCharacterSprite(weapon);
+        
         cm.setStatus("Waiting for other Player");
+
+        if(getEnWeapon()!="")
+        {
+            lm.stopRound();
+        }
     }
     public void chosePaper()
     {
@@ -91,6 +98,12 @@ public class PlayerController : MonoBehaviour
         FirebaseController.UpdateWeapon("Paper");
         setCharacterSprite(weapon);
         cm.setStatus("Waiting for other Player");
+
+        if (getEnWeapon() != "")
+        {
+            lm.stopRound();
+        }
+
     }
     public void choseScissors()
     {
@@ -98,6 +111,12 @@ public class PlayerController : MonoBehaviour
         FirebaseController.UpdateWeapon("Scissors");
         setCharacterSprite(weapon);
         cm.setStatus("Waiting for other Player");
+
+
+        if (getEnWeapon() != "")
+        {
+            lm.stopRound();
+        }
 
     }
 
@@ -148,9 +167,10 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public static void setEnWeapon(string weapon)
+    public static void setEnWeapon(string _enweapon)
     {
-        enWeapon = weapon;
+        enWeapon = _enweapon;
+        
     }
 
     public string getEnWeapon()

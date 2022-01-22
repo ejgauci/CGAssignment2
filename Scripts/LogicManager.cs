@@ -13,11 +13,28 @@ public class LogicManager : MonoBehaviour
 
     public CanvasManager cm;
 
+    public bool enSelected =false;
+
     void Start()
     {
         player = GameManager.gamePlayer;
     }
 
+    void Update()
+    {
+        if (playercont.getEnWeapon() != "" && enSelected ==false)
+        {
+            stopRound();
+        }
+    }
+
+
+    public void stopRound()
+    {
+        cm.stopTimer();
+        timerEnded();
+        enSelected = true;
+    }
 
     public void timerEnded()
     {
@@ -89,6 +106,8 @@ public class LogicManager : MonoBehaviour
                 return "You Won";
             }
         }
+
+        return "min rebah mela?";
     }
 
 

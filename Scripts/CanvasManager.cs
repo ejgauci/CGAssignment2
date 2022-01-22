@@ -50,6 +50,12 @@ public class CanvasManager : MonoBehaviour
     }
 
 
+    public void stopTimer()
+    {
+        seconds = 0;
+    }
+
+
     public void setStatus(String status)
     {
         statusText.GetComponent<TextMeshProUGUI>().text = status;
