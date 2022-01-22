@@ -9,12 +9,15 @@ public class FirebaseDLCManager : MonoBehaviour
 {
     const long maxAllowedSize = 1 * 1024 * 1024;
 
+    public GameObject sliderGO;
     public Slider slider;
     private static float byteTransferred;
     private static float byteCount;
 
     void Start()
     {
+        slider = sliderGO.GetComponent<Slider>();
+
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
         StorageReference storageRef = storage.GetReferenceFromUrl("gs://cg-assignment1-b592f.appspot.com");
         
@@ -103,6 +106,7 @@ public class FirebaseDLCManager : MonoBehaviour
 
                 byte[] fileContentsDLC1 = task.Result;
                 slider.value = 0;
+                sliderGO.SetActive(false);
                 Debug.Log("Finished!");
 
                 // Load the image into Unity
