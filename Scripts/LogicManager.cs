@@ -15,6 +15,8 @@ public class LogicManager : MonoBehaviour
 
     public bool enSelected =false;
 
+    public bool roundFinished = false;
+
     void Start()
     {
         player = GameManager.gamePlayer;
@@ -39,20 +41,25 @@ public class LogicManager : MonoBehaviour
 
     public void timerEnded()
     {
-        if (player == 1)
+        if (roundFinished == false)
         {
-            p2Weapon = playercont.getEnWeapon();
-            p1Weapon = playercont.getMyWeapon();
-        }
-        else if(player==2)
-        {
+            if (player == 1)
+            {
+                p2Weapon = playercont.getEnWeapon();
+                p1Weapon = playercont.getMyWeapon();
+            }
+            else if (player == 2)
+            {
 
-            p1Weapon = playercont.getEnWeapon();
-            p2Weapon = playercont.getMyWeapon();
-        }
+                p1Weapon = playercont.getEnWeapon();
+                p2Weapon = playercont.getMyWeapon();
+            }
 
-        CompareMoves();
-        playercont.setEnemySprite();
+            CompareMoves();
+            playercont.setEnemySprite();
+            roundFinished = true;
+        }
+        
     }
 
     public void CompareMoves()
@@ -77,7 +84,20 @@ public class LogicManager : MonoBehaviour
             case ("Paper", "Scissors"):
             case ("Scissors", "Rock"):
                 print("P2 WON");
+                cm.setStatus(whoWon(2));
+                break;
+            case ("Rock", ""):
+            case ("Paper", ""):
+            case ("Scissors", ""):
+                print("P1 WON");
                 cm.setStatus(whoWon(1));
+                break;
+
+            case ("", "Paper"):
+            case ("", "Scissors"):
+            case ("", "Rock"):
+                print("P2 WON");
+                cm.setStatus(whoWon(2));
                 break;
         }
     }
