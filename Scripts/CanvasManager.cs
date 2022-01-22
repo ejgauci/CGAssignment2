@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,7 +10,9 @@ public class CanvasManager : MonoBehaviour
     public int seconds = 5;
     public LogicManager lmanager;
 
-
+    [SerializeField] public TMPro.TMP_Text statusText;
+    [SerializeField] public TMPro.TMP_Text player1Pionts;
+    [SerializeField] public TMPro.TMP_Text player2Points;
 
     // Start is called before the first frame update
     void Start()
@@ -46,5 +49,10 @@ public class CanvasManager : MonoBehaviour
         return string.Format("{0:D2}:{1:D2}", mins, secs);
     }
 
+
+    public void setStatus(String status)
+    {
+        statusText.GetComponent<TextMeshProUGUI>().text = status;
+    }
 
 }

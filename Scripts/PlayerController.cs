@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public Sprite enScissors;
 
 
+    public CanvasManager cm;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
         EnemyObject = GameObject.FindGameObjectWithTag("Player" + playerEn);
         enemySR = EnemyObject.GetComponent<SpriteRenderer>();
+        
 
 
         //if (player == 2)
@@ -80,18 +83,21 @@ public class PlayerController : MonoBehaviour
         FirebaseController.UpdateWeapon("Rock");
 
         setCharacterSprite(weapon);
+        cm.setStatus("Waiting for other Player");
     }
     public void chosePaper()
     {
         weapon = "Paper";
         FirebaseController.UpdateWeapon("Paper");
         setCharacterSprite(weapon);
+        cm.setStatus("Waiting for other Player");
     }
     public void choseScissors()
     {
         weapon = "Scissors";
         FirebaseController.UpdateWeapon("Scissors");
         setCharacterSprite(weapon);
+        cm.setStatus("Waiting for other Player");
 
     }
 

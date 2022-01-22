@@ -11,6 +11,8 @@ public class LogicManager : MonoBehaviour
 
     public int player;
 
+    public CanvasManager cm;
+
     void Start()
     {
         player = GameManager.gamePlayer;
@@ -43,21 +45,52 @@ public class LogicManager : MonoBehaviour
             case ("Paper", "Paper"):
             case ("Scissors", "Scissors"):
                 print("DRAW");
+                cm.setStatus("DRAW");
                 break;
 
             case ("Rock", "Scissors"):
             case ("Paper", "Rock"):
             case ("Scissors", "Paper"):
                 print("P1 WON");
+                cm.setStatus(whoWon(1));
                 break;
 
             case ("Rock", "Paper"):
             case ("Paper", "Scissors"):
             case ("Scissors", "Rock"):
                 print("P2 WON");
+                cm.setStatus(whoWon(1));
                 break;
-
 
         }
     }
+
+    public string whoWon(int p)
+    {
+        if (player == 1)
+        {
+            if (p == 1)
+            {
+                return "You Won";
+            }
+            else
+            {
+                return "You Lost";
+            }
+        }
+        else if (player == 2)
+        {
+            if (p == 1)
+            {
+                return "You Lost";
+            }
+            else
+            {
+                return "You Won";
+            }
+        }
+    }
+
+
+
 }
