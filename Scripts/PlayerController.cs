@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
         if(getEnWeapon()!="")
         {
+            print("enemy is not null");
             lm.stopRound();
         }
     }
@@ -101,6 +102,7 @@ public class PlayerController : MonoBehaviour
 
         if (getEnWeapon() != "")
         {
+            print("enemy is not null");
             lm.stopRound();
         }
 
@@ -115,6 +117,7 @@ public class PlayerController : MonoBehaviour
 
         if (getEnWeapon() != "")
         {
+            print("enemy is not null");
             lm.stopRound();
         }
 

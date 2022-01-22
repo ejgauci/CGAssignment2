@@ -22,8 +22,9 @@ public class LogicManager : MonoBehaviour
 
     void Update()
     {
-        if (playercont.getEnWeapon() != "" && enSelected ==false)
+        if (playercont.getEnWeapon() != "" && enSelected ==false && playercont.getMyWeapon() != "")
         {
+            print("if in update");
             stopRound();
         }
     }
@@ -78,7 +79,6 @@ public class LogicManager : MonoBehaviour
                 print("P2 WON");
                 cm.setStatus(whoWon(1));
                 break;
-
         }
     }
 
