@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
         {
             playerSR.flipX = true;
         }
+
+        GetEnemyWeapon_Firebase();
     }
 
     // Update is called once per frame
@@ -95,7 +97,7 @@ public class PlayerController : MonoBehaviour
        
     }
     
-    public void GetEnemyWeapon()
+    public void GetEnemyWeapon_Firebase()
     {
         FirebaseController.getEnemyWeapon();
         
@@ -104,6 +106,16 @@ public class PlayerController : MonoBehaviour
     public static void setEnWeapon(string weapon)
     {
         enWeapon = weapon;
+    }
+
+    public string getEnWeapon()
+    {
+        return enWeapon;
+    }
+
+    public string getMyWeapon()
+    {
+        return weapon;
     }
 
 }
