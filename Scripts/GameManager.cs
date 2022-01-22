@@ -32,12 +32,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //if (SceneManager.GetActiveScene().name == "Welcome")
+        //DontDestroyOnLoad(this.gameObject);
     }
 
 
     public static void NextScene(string SceneName)
     {
+        
         SceneManager.LoadScene(SceneName);
     }
 
