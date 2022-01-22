@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase.Storage;
 using Firebase.Extensions;
+
 
 public class FirebaseDLCManager : MonoBehaviour
 {
@@ -20,11 +22,11 @@ public class FirebaseDLCManager : MonoBehaviour
 
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
         StorageReference storageRef = storage.GetReferenceFromUrl("gs://cg-assignment1-b592f.appspot.com");
-        
-        
 
 
-        StorageReference background = storageRef.Child("DLC").Child("background.jpg");
+        int randNum = Random.Range(1, 4);
+
+        StorageReference background = storageRef.Child("DLC").Child("background"+randNum+".jpg");
         //DownloadBackground(background);
         
         DownloadBackgroundDLC(background);
@@ -119,19 +121,19 @@ public class FirebaseDLCManager : MonoBehaviour
 
                 //Create Sprite
                 Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-                GameObject redBox = new GameObject();
-                redBox.gameObject.transform.localScale = new Vector2(1.25f, 1.25f);
-                redBox.transform.position = new Vector2(0f, 0f);
+                GameObject background = new GameObject();
+                background.gameObject.transform.localScale = new Vector2(1.25f, 1.25f);
+                background.transform.position = new Vector2(0f, 0f);
 
-                redBox.AddComponent<SpriteRenderer>().sprite = mySprite;
+                background.AddComponent<SpriteRenderer>().sprite = mySprite;
 
                 if (GameManager.gamePlayer == 2)
                 {
-                    redBox.AddComponent<PlayerController>();
+                    background.AddComponent<PlayerController>();
                 }
 
 
-                redBox.name = "Background";
+                background.name = "Background";
                 Debug.Log("Finished downloading Background!");
 
 

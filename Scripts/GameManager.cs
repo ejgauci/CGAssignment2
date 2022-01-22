@@ -103,4 +103,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void EnterStore()
+    {
+        NextScene("Store");
+    }
+
 }
