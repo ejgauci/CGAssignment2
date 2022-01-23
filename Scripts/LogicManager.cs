@@ -139,6 +139,10 @@ public class LogicManager : MonoBehaviour
     }
 
 
+    public string getRoundNumber()
+    {
+        return roundNumber.ToString();
+    }
     public void newRound(int playerWinner)
     {
         roundNumber++;

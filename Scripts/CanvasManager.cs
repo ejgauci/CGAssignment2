@@ -8,6 +8,7 @@ public class CanvasManager : MonoBehaviour
 {
 
     public int seconds = 10;
+    public int countdownRound;
     public LogicManager lmanager;
 
     [SerializeField] public TMPro.TMP_Text statusText;
@@ -25,7 +26,7 @@ public class CanvasManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void startTimer()
@@ -44,9 +45,9 @@ public class CanvasManager : MonoBehaviour
             seconds--;
         }
 
-            transform.Find("CountdownTimer").GetComponent<TextMeshProUGUI>().text = "00:00";
-            lmanager.timerEnded();
-        
+        transform.Find("CountdownTimer").GetComponent<TextMeshProUGUI>().text = "00:00";
+        lmanager.timerEnded();
+
 
     }
 
@@ -71,16 +72,41 @@ public class CanvasManager : MonoBehaviour
 
     public void setP1Points(int points)
     {
-        player1Points.GetComponent<TextMeshProUGUI>().text = "P1: "+points;
+        player1Points.GetComponent<TextMeshProUGUI>().text = "P1: " + points;
+        startRoundCountdown();
     }
+
     public void setP2Points(int points)
     {
         player2Points.GetComponent<TextMeshProUGUI>().text = "P2: " + points;
+        startRoundCountdown();
     }
 
 
     public void setRoundCount(string round)
     {
         roundCount.GetComponent<TextMeshProUGUI>().text = round;
+    }
+
+
+    void startRoundCountdown()
+    {
+        countdownRound = 5;
+        StartCoroutine(RoundCountdown());
+    }
+
+    IEnumerator RoundCountdown()
+    {
+
+        while (countdownRound > 0)
+        {
+            setRoundCount(countdownRound.ToString());
+            yield return new WaitForSeconds(1f);
+            countdownRound--;
+        }
+
+        setRoundCount("Round "+lmanager.getRoundNumber());
+        
+
     }
 }

@@ -5,8 +5,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public int score = 0;
+    
     public int player;
     public int playerEn;
     
@@ -68,13 +67,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (score == 2)
-        {
-            FirebaseController.WonGame();
-            GameManager.NextScene("Win");
-
-        }
+        
 
     }
 
