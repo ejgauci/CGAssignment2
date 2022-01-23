@@ -135,6 +135,7 @@ public class FirebaseDLCManager : MonoBehaviour
 
                 background.name = "Background";
                 Debug.Log("Finished downloading Background!");
+                background.transform.localScale = new Vector2(1.75f, 1.75f);
 
 
             }
