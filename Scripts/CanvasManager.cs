@@ -7,23 +7,31 @@ using UnityEngine;
 public class CanvasManager : MonoBehaviour
 {
 
-    public int seconds = 5;
+    public int seconds = 10;
     public LogicManager lmanager;
 
     [SerializeField] public TMPro.TMP_Text statusText;
-    [SerializeField] public TMPro.TMP_Text player1Pionts;
+    [SerializeField] public TMPro.TMP_Text roundCount;
+    [SerializeField] public TMPro.TMP_Text player1Points;
     [SerializeField] public TMPro.TMP_Text player2Points;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(CountdownToStart());
+        startTimer();
+        setRoundCount("Round 1");
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void startTimer()
+    {
+        seconds = 10;
+        StartCoroutine(CountdownToStart());
     }
 
     IEnumerator CountdownToStart()
@@ -61,4 +69,18 @@ public class CanvasManager : MonoBehaviour
         statusText.GetComponent<TextMeshProUGUI>().text = status;
     }
 
+    public void setP1Points(int points)
+    {
+        player1Points.GetComponent<TextMeshProUGUI>().text = "P1: "+points;
+    }
+    public void setP2Points(int points)
+    {
+        player2Points.GetComponent<TextMeshProUGUI>().text = "P2: " + points;
+    }
+
+
+    public void setRoundCount(string round)
+    {
+        roundCount.GetComponent<TextMeshProUGUI>().text = round;
+    }
 }

@@ -25,11 +25,7 @@ public class FirebaseController : MonoBehaviour
 
 
     }
-
-    private void Awake()
-    {
-        
-    }
+    
 
     private void Update()
     {

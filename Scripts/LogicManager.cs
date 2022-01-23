@@ -7,15 +7,18 @@ public class LogicManager : MonoBehaviour
 
     public PlayerController playercont;
     public string p1Weapon;
+    public int p1Points=0;
     public string p2Weapon;
+    public int p2Points=0;
+
+    public int roundNumber = 1;
 
     public int player;
 
     public CanvasManager cm;
 
-    public bool enSelected =false;
-
-    public bool roundFinished = false;
+    bool enSelected =false;
+    bool roundFinished = false;
 
     void Start()
     {
@@ -71,6 +74,7 @@ public class LogicManager : MonoBehaviour
             case ("Scissors", "Scissors"):
                 print("DRAW");
                 cm.setStatus("DRAW");
+                newRound(0);
                 break;
 
             case ("Rock", "Scissors"):
@@ -78,6 +82,7 @@ public class LogicManager : MonoBehaviour
             case ("Scissors", "Paper"):
                 print("P1 WON");
                 cm.setStatus(whoWon(1));
+                newRound(1);
                 break;
 
             case ("Rock", "Paper"):
@@ -85,12 +90,14 @@ public class LogicManager : MonoBehaviour
             case ("Scissors", "Rock"):
                 print("P2 WON");
                 cm.setStatus(whoWon(2));
+                newRound(2);
                 break;
             case ("Rock", ""):
             case ("Paper", ""):
             case ("Scissors", ""):
                 print("P1 WON");
                 cm.setStatus(whoWon(1));
+                newRound(1);
                 break;
 
             case ("", "Paper"):
@@ -98,6 +105,7 @@ public class LogicManager : MonoBehaviour
             case ("", "Rock"):
                 print("P2 WON");
                 cm.setStatus(whoWon(2));
+                newRound(2);
                 break;
         }
     }
@@ -131,5 +139,47 @@ public class LogicManager : MonoBehaviour
     }
 
 
+    public void newRound(int playerWinner)
+    {
+        roundNumber++;
+
+        if (roundNumber == 6)
+        {
+            //go to winner scene
+        }
+        else
+        {
+            
+
+            if (playerWinner == 0)
+            {
+                //Draw
+            }
+            else if (playerWinner == 1)
+            {
+                addPointsToPlayer(1);
+
+            }
+            else if (playerWinner == 2)
+            {
+                addPointsToPlayer(2);
+            }
+        }
+        
+    }
+
+    void addPointsToPlayer(int playerWinner)
+    {
+        if (playerWinner == 1)
+        {
+            p1Points++;
+            cm.setP1Points(p1Points);
+        }
+        else
+        {
+            p2Points++;
+            cm.setP2Points(p2Points);
+        }
+    }
 
 }
