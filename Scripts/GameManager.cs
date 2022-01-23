@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         //if (SceneManager.GetActiveScene().name == "Welcome")
         //DontDestroyOnLoad(this.gameObject);
+
     }
 
 

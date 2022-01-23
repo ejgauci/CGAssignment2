@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Firebase;
 using UnityEngine;
 using Firebase.Database;
+using UnityEngine.SceneManagement;
 
 
 public class FirebaseController : MonoBehaviour
@@ -14,16 +15,36 @@ public class FirebaseController : MonoBehaviour
     public static string _player1 = "";
     public static string _player2 = "";
 
+    public bool checkedGame = false;
+    public bool inGame = false;
+
         
     private void Start() {
         DontDestroyOnLoad(this.gameObject);
         _dbRef = FirebaseDatabase.DefaultInstance.RootReference;
+
+
+    }
+
+    private void Awake()
+    {
         
     }
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene().name == "Lobby_p2" && checkedGame==false)
+        {
+            checkedGame = true;
+            CheckStarted();
+        }
 
+        if (_started == "true" && inGame==false)
+        {
+            inGame = true;
+            SceneManager.LoadScene("Game");
+            
+        }
     }
 
 

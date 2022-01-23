@@ -16,8 +16,16 @@ public class StoreManager : MonoBehaviour
 
     public int coins = 1000;
 
+    public GameObject sliderGO;
+    public Slider slider;
+    private static float byteTransferred;
+    private static float byteCount;
+
+
     void Start()
     {
+        slider = sliderGO.GetComponent<Slider>();
+
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
         storageRef = storage.GetReferenceFromUrl("gs://cg-assignment1-b592f.appspot.com");
         
@@ -29,6 +37,8 @@ public class StoreManager : MonoBehaviour
     {
         if (coins >= 250)
         {
+            sliderGO.SetActive(true);
+
             if (GameObject.Find("Background"))
             {
                 print("there is already a background");
@@ -46,6 +56,8 @@ public class StoreManager : MonoBehaviour
     {
         if (coins >= 600)
         {
+            sliderGO.SetActive(true);
+
             if (GameObject.Find("Background"))
             {
                 print("there is already a background");
@@ -63,6 +75,8 @@ public class StoreManager : MonoBehaviour
     {
         if (coins >= 1000)
         {
+            sliderGO.SetActive(true);
+
             if (GameObject.Find("Background"))
             {
                 print("there is already a background");
@@ -83,7 +97,24 @@ public class StoreManager : MonoBehaviour
 
     private void DownloadBackground(StorageReference reference)
     {
-        reference.GetBytesAsync(maxAllowedSize).ContinueWithOnMainThread(task => {
+        //const long maxAllowedSize = 1 * 5096 * 5096;
+        reference.GetBytesAsync(maxAllowedSize, new StorageProgress<DownloadState>(state =>
+        {
+            byteTransferred = state.BytesTransferred;
+            byteCount = state.TotalByteCount;
+
+
+            slider.value = ((byteTransferred / byteCount) * 100);
+
+
+            Debug.Log(string.Format("Progress: {0} of {1} bytes transferred.",
+                state.BytesTransferred,
+                state.TotalByteCount
+            ));
+
+        })).ContinueWithOnMainThread(task => {
+
+
             if (task.IsFaulted || task.IsCanceled)
             {
                 Debug.LogException(task.Exception);
@@ -92,22 +123,25 @@ public class StoreManager : MonoBehaviour
             else
             {
 
-                byte[] fileContents = task.Result;
+
+                byte[] fileContentsDLC1 = task.Result;
+                slider.value = 0;
+                sliderGO.SetActive(false);
+                Debug.Log("Finished!");
 
                 // Load the image into Unity
 
                 //Create Texture
-                Texture2D bgTex = new Texture2D(1024, 1024);
-                bgTex.LoadImage(fileContents);
+                Texture2D tex = new Texture2D(1024, 1024);
+                tex.LoadImage(fileContentsDLC1);
+
 
 
                 //Create Sprite
-
-                Sprite mySprite = Sprite.Create(bgTex, new Rect(0.0f, 0.0f, bgTex.width, bgTex.height), new Vector2(0.5f, 0.5f), 100.0f);
+                Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
                 GameObject background = new GameObject();
                 background.gameObject.transform.localScale = new Vector2(1.25f, 1.25f);
                 background.transform.position = new Vector2(0f, 0f);
-                
 
                 background.AddComponent<SpriteRenderer>().sprite = mySprite;
 
@@ -120,13 +154,14 @@ public class StoreManager : MonoBehaviour
                 background.name = "Background";
                 Debug.Log("Finished downloading Background!");
                 background.transform.localScale = new Vector2(1.75f, 1.75f);
+
+
             }
         });
 
-        
+
 
     }
-    
     
 
 }
