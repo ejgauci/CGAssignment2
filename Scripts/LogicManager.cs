@@ -29,11 +29,19 @@ public class LogicManager : MonoBehaviour
     {
         if (playercont.getEnWeapon() != "" && enSelected ==false && playercont.getMyWeapon() != "")
         {
-            print("if in update");
+            print("player liehor ghazel weapon");
             stopRound();
         }
     }
 
+    public void setEnSelected(bool _enSeleted)
+    {
+        enSelected = _enSeleted;
+    }
+    public void setRoundFinished(bool _roundFinished)
+    {
+        roundFinished = _roundFinished;
+    }
 
     public void stopRound()
     {
@@ -158,6 +166,7 @@ public class LogicManager : MonoBehaviour
             if (playerWinner == 0)
             {
                 //Draw
+                cm.startRoundCountdown();
             }
             else if (playerWinner == 1)
             {

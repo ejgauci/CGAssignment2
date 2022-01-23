@@ -184,8 +184,13 @@ public class PlayerController : MonoBehaviour
     public void resetRoundPC()
     {
         FirebaseController.UpdateWeapon("");
+
         playerSR.sprite = idle;
         enemySR.sprite = idle;
+        weapon = "";
+        enWeapon = "";
+        lm.setEnSelected(false);
+        lm.setRoundFinished(false);
 
     }
 
