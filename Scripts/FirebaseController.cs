@@ -219,6 +219,21 @@ public class FirebaseController : MonoBehaviour
                 .SetValueAsync(weapon);
         }
     }
+    public static void UpdateScore(string score)
+    {
+        if (GameManager.gamePlayer == 1)
+        {
+            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player1").Child("score")
+                .SetValueAsync(score);
+        }
+        else
+        if (GameManager.gamePlayer == 2)
+        {
+            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player2").Child("score")
+                .SetValueAsync(score);
+        }
+    }
+
 
     public static void WonGame()
     {

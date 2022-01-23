@@ -106,7 +106,8 @@ public class CanvasManager : MonoBehaviour
         }
 
         setRoundCount("Round "+lmanager.getRoundNumber());
-        
+        setStatus("VS");
+        lmanager.resetRound();
 
     }
 }

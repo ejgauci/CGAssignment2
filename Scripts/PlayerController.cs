@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
 
     public GameObject EnemyObject;
     public SpriteRenderer enemySR;
-    
+
+
+    public Sprite idle;
 
     public Sprite myRock;
     public Sprite myPaper;
@@ -179,6 +181,19 @@ public class PlayerController : MonoBehaviour
         return weapon;
     }
 
+    public void resetRoundPC()
+    {
+        FirebaseController.UpdateWeapon("");
+        playerSR.sprite = idle;
+        enemySR.sprite = idle;
+
+    }
+
+    public void increasePointFB(int points)
+    {
+
+        FirebaseController.UpdateScore(points.ToString());
+    }
 }
 
 

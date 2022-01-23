@@ -1423,7 +1423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3431822fdb66644b92976dd8282a572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   player: 0
   playerEn: 0
   weapon: 
@@ -1431,6 +1430,7 @@ MonoBehaviour:
   playerSR: {fileID: 0}
   EnemyObject: {fileID: 0}
   enemySR: {fileID: 0}
+  idle: {fileID: -186116656865458268, guid: 95f34a2b4a8ffec45894c81d3f2c8304, type: 3}
   myRock: {fileID: -6342759149738690986, guid: 95f34a2b4a8ffec45894c81d3f2c8304, type: 3}
   myPaper: {fileID: 4908343205209002646, guid: 95f34a2b4a8ffec45894c81d3f2c8304, type: 3}
   myScissors: {fileID: 564065223390252366, guid: 95f34a2b4a8ffec45894c81d3f2c8304, type: 3}
@@ -2029,6 +2029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seconds: 10
+  countdownRound: 0
   lmanager: {fileID: 850911404}
   statusText: {fileID: 453099912}
   roundCount: {fileID: 974260370}

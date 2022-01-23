@@ -184,6 +184,26 @@ public class LogicManager : MonoBehaviour
             p2Points++;
             cm.setP2Points(p2Points);
         }
+
+        if (playerWinner == player)
+        {
+            if (player == 1)
+            {
+                playercont.increasePointFB(p1Points);
+            }
+            else if (player == 2)
+            {
+                playercont.increasePointFB(p2Points);
+            }
+            
+        }
     }
+
+
+    public void resetRound()
+    {
+        playercont.resetRoundPC();
+    }
+
 
 }
