@@ -10,14 +10,19 @@ public class WinSceneScript : MonoBehaviour
 
     public string winnerText="";
     public int player;
-    public static int p1score;
-    public static int p2score;
+    public static int p1score =0;
+    public static int p2score =0;
+
+    public string winner;
+    public SaveFileTXT saveTXT;
+
 
 
     void Start()
     {
         player = GameManager.gamePlayer;
         getPoints();
+        
     }
 
     public void getPoints()
@@ -50,19 +55,27 @@ public class WinSceneScript : MonoBehaviour
 
         if (p1score > p2score)
         {
+            
             //p1 won
+             winner = "Player1";
             if (player == 1)
             {
                 winnerText = "You Won";
+                FirebaseController.WonGame();
+                SaveFileTXT();
             }
             else
             {
                 winnerText = "You Lost";
             }
+
+           
         }
         else if (p1score < p2score)
         {
             //p2 won
+            winner = "Player2";
+
             if (player == 1)
             {
                 winnerText = "You Lost";
@@ -70,14 +83,24 @@ public class WinSceneScript : MonoBehaviour
             else
             {
                 winnerText = "You Won";
+                FirebaseController.WonGame();
+                SaveFileTXT();
             }
+            
         }
         else
         {
             winnerText = "Draw";
+            winner = "DRAW";
         }
 
         WinnerName.GetComponent<TextMeshProUGUI>().text = winnerText;
+    }
+
+    void SaveFileTXT()
+    {
+
+        saveTXT.saveTXT(FirebaseController._key, p1score, p2score, winner, "hafna hin");
     }
 
 }

@@ -72,10 +72,14 @@ public class FirebaseController : MonoBehaviour
     public static IEnumerator CreateGame(string player1){
 
         _player1 = player1;
-        GameDetails game = new GameDetails();
+        //GameDetails game = new GameDetails();
         _key = _dbRef.Child("Games").Push().Key;
 
+        GameDetails game = new GameDetails("false", "", _key);
         yield return _dbRef.Child("Games").Child(_key).Child("GameDetails").SetRawJsonValueAsync(JsonUtility.ToJson(game));
+
+
+        //yield return _dbRef.Child("Games").Child(_key).Child("GameDetails").SetRawJsonValueAsync(JsonUtility.ToJson(game));
 
 
         PlayerDetails p1 = new PlayerDetails(player1, "", "");
@@ -144,7 +148,7 @@ public class FirebaseController : MonoBehaviour
 
         Debug.Log("(game started) the game key is" + _key);
 
-        GameDetails game = new GameDetails("true", "");
+        GameDetails game = new GameDetails("true", "", _key);
         yield return _dbRef.Child("Games").Child(_key).Child("GameDetails").SetRawJsonValueAsync(JsonUtility.ToJson(game));
         
 
@@ -305,5 +309,5 @@ public class FirebaseController : MonoBehaviour
     }
 
 
-
+    
 }
