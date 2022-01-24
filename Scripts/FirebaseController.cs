@@ -75,7 +75,7 @@ public class FirebaseController : MonoBehaviour
         //GameDetails game = new GameDetails();
         _key = _dbRef.Child("Games").Push().Key;
 
-        GameDetails game = new GameDetails("false", "", _key);
+        GameDetails game = new GameDetails("false", "", _key, "");
         yield return _dbRef.Child("Games").Child(_key).Child("GameDetails").SetRawJsonValueAsync(JsonUtility.ToJson(game));
 
 
@@ -148,7 +148,9 @@ public class FirebaseController : MonoBehaviour
 
         Debug.Log("(game started) the game key is" + _key);
 
-        GameDetails game = new GameDetails("true", "", _key);
+        
+
+        GameDetails game = new GameDetails("true", "", _key, "");
         yield return _dbRef.Child("Games").Child(_key).Child("GameDetails").SetRawJsonValueAsync(JsonUtility.ToJson(game));
         
 
@@ -192,7 +194,6 @@ public class FirebaseController : MonoBehaviour
         }
 
         
-
     }
     public static void UpdateScore(string score)
     {
@@ -224,6 +225,15 @@ public class FirebaseController : MonoBehaviour
         }
     }
 
+    public static void setTotalTime(string ttime)
+    {
+        if (GameManager.gamePlayer == 1)
+        {
+            _dbRef.Child("Games").Child(_key).Child("GameDetails").Child("totalTime")
+                .SetValueAsync(ttime);
+        }
+        
+    }
 
     public static void WonGame()
     {

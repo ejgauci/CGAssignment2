@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,12 @@ public class LogicManager : MonoBehaviour
     bool enSelected =false;
     bool roundFinished = false;
 
+    
+    public float startedTime;
+    public float endTime;
+    public float totalTime;
+
+
     void Start()
     {
         p1Points = 0;
@@ -30,6 +37,8 @@ public class LogicManager : MonoBehaviour
         playercont.increasePointFB(p2Points);
         cm.setP1Points(p1Points);
         cm.setP2Points(p2Points);
+
+        startedTime = System.DateTime.Now.Second;
     }
 
     void Update()
@@ -174,7 +183,13 @@ public class LogicManager : MonoBehaviour
                 addPointsToPlayer(2);
             }
 
+
+
+            endTime = System.DateTime.Now.Second;
+            totalTime = endTime - startedTime;
+            FirebaseController.setTotalTime(totalTime.ToString());
             print("winner scene");
+            //print("total time: "+ totalTime);
             SceneManager.LoadScene("Win");
         }
         else

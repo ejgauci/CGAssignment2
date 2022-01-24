@@ -131,4 +131,5 @@ public class WinSceneScript : MonoBehaviour
         saveTXT.saveTXT(FirebaseController._key, p1Moves, p2Moves, winner, "hafna hin");
     }
 
+
 }
