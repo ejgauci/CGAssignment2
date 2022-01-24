@@ -190,6 +190,9 @@ public class FirebaseController : MonoBehaviour
             _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player2").Child("weapon")
                 .SetValueAsync(weapon);
         }
+
+        
+
     }
     public static void UpdateScore(string score)
     {
@@ -324,5 +327,58 @@ public class FirebaseController : MonoBehaviour
     }
 
 
-    
+    public static string _p1Moves;
+    public static void getP1Moves()
+    {
+        Debug.Log("get p1 moves");
+        FirebaseDatabase.DefaultInstance.GetReference("Games").ValueChanged += FirebaseController_GetP1Moves;
+    }
+
+    private static void FirebaseController_GetP1Moves(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError("error msg");
+            return;
+        }
+        else
+        {
+            _p1Moves = e.Snapshot.Child(_key).Child("Objects").Child("Player1").Child("moves").GetValue(true).ToString();
+        }
+
+        Debug.Log("P1 moves:" + _p1Moves);
+        WinSceneScript.setP1Moves(_p1Moves);
+
+    }
+
+
+    public static string _p2Moves;
+    public static void getP2Moves()
+    {
+        Debug.Log("get p1 Score");
+        FirebaseDatabase.DefaultInstance.GetReference("Games").ValueChanged += FirebaseController_GetP2Moves;
+    }
+
+    private static void FirebaseController_GetP2Moves(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError("error msg");
+            return;
+        }
+        else
+        {
+            _p2Moves = e.Snapshot.Child(_key).Child("Objects").Child("Player2").Child("moves").GetValue(true).ToString();
+        }
+
+        Debug.Log("P2 score:" + _p2Moves);
+        WinSceneScript.setP2Moves(_p2Moves);
+
+    }
+
+
+
+
+
+
 }
