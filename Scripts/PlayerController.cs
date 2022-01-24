@@ -128,6 +128,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+
     public void setCharacterSprite(string weapon)
     {
         if (weapon == "Rock")

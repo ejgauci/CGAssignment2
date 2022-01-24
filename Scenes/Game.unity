@@ -1425,6 +1425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 0
   playerEn: 0
+  moves: 0
   weapon: 
   PlayerObject: {fileID: 0}
   playerSR: {fileID: 0}
@@ -1473,6 +1474,9 @@ MonoBehaviour:
   roundNumber: 1
   player: 0
   cm: {fileID: 1277755725}
+  startedTime: 0
+  endTime: 0
+  totalTime: 0
 --- !u!1 &974260367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,9 +1694,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 850911402}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: GetEnemyWeapon
+      - m_Target: {fileID: 850911404}
+        m_TargetAssemblyTypeName: LogicManager, Assembly-CSharp
+        m_MethodName: Surrender
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

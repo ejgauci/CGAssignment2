@@ -49,6 +49,17 @@ public class LogicManager : MonoBehaviour
             stopRound();
         }
     }
+    public void Surrender()
+    {
+        endTime = System.DateTime.Now.Second;
+        totalTime = endTime - startedTime;
+        FirebaseController.setTotalTime(totalTime.ToString());
+        print("Surrendered");
+        //print("total time: "+ totalTime);
+        SceneManager.LoadScene("Win");
+
+    }
+
 
     public void setEnSelected(bool _enSeleted)
     {

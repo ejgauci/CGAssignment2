@@ -21,6 +21,8 @@ public class StoreManager : MonoBehaviour
     private static float byteTransferred;
     private static float byteCount;
 
+    public GameObject wallet;
+
 
     void Start()
     {
@@ -29,6 +31,11 @@ public class StoreManager : MonoBehaviour
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;
         storageRef = storage.GetReferenceFromUrl("gs://cg-assignment1-b592f.appspot.com");
         
+    }
+
+    void Update()
+    {
+        wallet.GetComponent<Text>().text = "Wallet: " + coins + " coins";
     }
 
 
