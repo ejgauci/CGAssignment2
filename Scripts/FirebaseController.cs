@@ -387,7 +387,29 @@ public class FirebaseController : MonoBehaviour
     }
 
 
+    public static string totaltime;
+    public static void getTotalTime()
+    {
+        Debug.Log("get total time");
+        FirebaseDatabase.DefaultInstance.GetReference("Games").ValueChanged += FirebaseController_GetTotalTime;
+    }
 
+    private static void FirebaseController_GetTotalTime(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError("error msg");
+            return;
+        }
+        else
+        {
+            totaltime = e.Snapshot.Child(_key).Child("GameDetails").Child("totalTime").GetValue(true).ToString();
+        }
+
+        Debug.Log("game total time:" + totaltime);
+        WinSceneScript.setTotalTime(totaltime);
+
+    }
 
 
 

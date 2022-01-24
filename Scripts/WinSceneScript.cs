@@ -16,6 +16,8 @@ public class WinSceneScript : MonoBehaviour
     public static int p1Moves = 0;
     public static int p2Moves = 0;
 
+    public static string timeTaken = "";
+
 
 
     public string winner;
@@ -28,6 +30,7 @@ public class WinSceneScript : MonoBehaviour
         player = GameManager.gamePlayer;
         getPoints();
         getMoves();
+        getTimeTaken();
 
     }
 
@@ -72,7 +75,16 @@ public class WinSceneScript : MonoBehaviour
         p2Moves = int.Parse(_p2Moves);
         //print("p2Set: " + p2score + ", " + _p2score);
     }
+    
+    public static void setTotalTime(string _totalTime)
+    {
+        timeTaken = _totalTime;
+    }
+    public void getTimeTaken()
+    {
+        FirebaseController.getTotalTime();
 
+    }
 
     IEnumerator WinnerCoroutine()
     {
@@ -127,8 +139,9 @@ public class WinSceneScript : MonoBehaviour
 
     void SaveFileTXT()
     {
-
-        saveTXT.saveTXT(FirebaseController._key, p1Moves, p2Moves, winner, "hafna hin");
+        Debug.Log("game total time (SAVE):" + timeTaken);
+        Debug.Log("game total time (FB):" + FirebaseController.totaltime);
+        saveTXT.saveTXT(FirebaseController._key, p1Moves, p2Moves, winner, timeTaken);
     }
 
 
