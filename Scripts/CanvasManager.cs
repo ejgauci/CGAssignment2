@@ -89,9 +89,10 @@ public class CanvasManager : MonoBehaviour
     }
 
 
-    void startRoundCountdown()
+    public void startRoundCountdown()
     {
-        countdownRound = 5;
+
+        countdownRound = 3;
         StartCoroutine(RoundCountdown());
     }
 

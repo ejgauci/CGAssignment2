@@ -171,38 +171,6 @@ public class FirebaseController : MonoBehaviour
         Debug.Log("did the game start:" + _started);
     }
 
-    //public void ListenIfGameStarted()
-    //{
-    //    //Listen if game started
-
-    //    Debug.Log("qijed aw bro");
-    //    _dbRef.Child("Games").Child(_key).Child("GameDetails").ValueChanged += IfGameStarted;
-    //}
-
-
-    ////if game is started by player 1
-    //public static void IfGameStarted(object sender, ValueChangedEventArgs args)
-    //{
-    //    if (args.DatabaseError != null)
-    //    {
-    //        Debug.LogError(args.DatabaseError.Message);
-    //        return;
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("listening if started");
-    //        foreach (var child in args.Snapshot.Children)
-    //        {
-    //            if (child.Key == "started")
-    //            {
-    //                _started = child.Value.ToString();
-    //                Debug.Log("Game Started by player1");
-
-    //            }
-    //        }
-
-    //    }
-    //}
 
 
     public static void UpdateWeapon(string weapon)
@@ -285,7 +253,57 @@ public class FirebaseController : MonoBehaviour
         PlayerController.setEnWeapon(_enemyWeapon);
 
     }
+
     
+    public static string _p1Score;
+    public static void getP1Score()
+    {
+        Debug.Log("get p1 Score");
+        FirebaseDatabase.DefaultInstance.GetReference("Games").ValueChanged += FirebaseController_GetP1Score;
+    }
+
+    private static void FirebaseController_GetP1Score(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError("error msg");
+            return;
+        }
+        else
+        {
+            _p1Score = e.Snapshot.Child(_key).Child("Objects").Child("Player1").Child("score").GetValue(true).ToString();
+        }
+
+        Debug.Log("P1 score:" + _p1Score);
+        WinSceneScript.setP1Score(_p1Score);
+
+    }
+
+
+    public static string _p2Score;
+    public static void getP2Score()
+    {
+        Debug.Log("get p1 Score");
+        FirebaseDatabase.DefaultInstance.GetReference("Games").ValueChanged += FirebaseController_GetP2Score;
+    }
+
+    private static void FirebaseController_GetP2Score(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError("error msg");
+            return;
+        }
+        else
+        {
+            _p2Score = e.Snapshot.Child(_key).Child("Objects").Child("Player2").Child("score").GetValue(true).ToString();
+        }
+
+        Debug.Log("P2 score:" + _p2Score);
+        WinSceneScript.setP2Score(_p2Score);
+
+    }
+
 
 
 }

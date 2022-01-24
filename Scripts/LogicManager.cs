@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LogicManager : MonoBehaviour
 {
@@ -157,7 +158,18 @@ public class LogicManager : MonoBehaviour
 
         if (roundNumber == 6)
         {
-            //go to winner scene
+            if (playerWinner == 1)
+            {
+                addPointsToPlayer(1);
+
+            }
+            else if (playerWinner == 2)
+            {
+                addPointsToPlayer(2);
+            }
+
+            print("winner scene");
+            SceneManager.LoadScene("Win");
         }
         else
         {
@@ -186,12 +198,19 @@ public class LogicManager : MonoBehaviour
         if (playerWinner == 1)
         {
             p1Points++;
-            cm.setP1Points(p1Points);
+            if (roundNumber != 6)
+            {
+                cm.setP1Points(p1Points);
+            }
+            
         }
         else
         {
             p2Points++;
-            cm.setP2Points(p2Points);
+            if (roundNumber != 6)
+            {
+                cm.setP2Points(p2Points);
+            }
         }
 
         if (playerWinner == player)
@@ -214,5 +233,6 @@ public class LogicManager : MonoBehaviour
         playercont.resetRoundPC();
     }
 
+    
 
 }
