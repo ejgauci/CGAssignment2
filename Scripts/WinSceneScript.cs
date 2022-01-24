@@ -74,7 +74,7 @@ public class WinSceneScript : MonoBehaviour
         }
         else
         {
-            winnerText = "kif gejt aw?";
+            winnerText = "Draw";
         }
 
         WinnerName.GetComponent<TextMeshProUGUI>().text = winnerText;

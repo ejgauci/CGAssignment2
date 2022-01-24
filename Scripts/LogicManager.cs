@@ -23,7 +23,13 @@ public class LogicManager : MonoBehaviour
 
     void Start()
     {
+        p1Points = 0;
+        p2Points = 0;
         player = GameManager.gamePlayer;
+        playercont.increasePointFB(p1Points);
+        playercont.increasePointFB(p2Points);
+        cm.setP1Points(p1Points);
+        cm.setP2Points(p2Points);
     }
 
     void Update()
