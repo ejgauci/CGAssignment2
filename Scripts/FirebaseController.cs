@@ -82,7 +82,7 @@ public class FirebaseController : MonoBehaviour
         //yield return _dbRef.Child("Games").Child(_key).Child("GameDetails").SetRawJsonValueAsync(JsonUtility.ToJson(game));
 
 
-        PlayerDetails p1 = new PlayerDetails(player1, "", "");
+        PlayerDetails p1 = new PlayerDetails(player1, "", "", "");
         yield return _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player1").SetRawJsonValueAsync(JsonUtility.ToJson(p1));
 
 
@@ -106,7 +106,7 @@ public class FirebaseController : MonoBehaviour
         Debug.Log("p2 name" + _player2);
 
 
-        PlayerDetails p2 = new PlayerDetails(_player2, "", "");
+        PlayerDetails p2 = new PlayerDetails(_player2, "", "", "");
         _dbRef.Child("Games").Child(key).Child("Objects").Child("Player2").SetRawJsonValueAsync(JsonUtility.ToJson(p2));
 
       
@@ -203,6 +203,21 @@ public class FirebaseController : MonoBehaviour
         {
             _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player2").Child("score")
                 .SetValueAsync(score);
+        }
+    }
+
+    public static void UpdateMoves(string moves)
+    {
+        if (GameManager.gamePlayer == 1)
+        {
+            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player1").Child("moves")
+                .SetValueAsync(moves);
+        }
+        else
+        if (GameManager.gamePlayer == 2)
+        {
+            _dbRef.Child("Games").Child(_key).Child("Objects").Child("Player2").Child("moves")
+                .SetValueAsync(moves);
         }
     }
 

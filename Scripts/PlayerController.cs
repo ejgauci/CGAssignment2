@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     
     public int player;
     public int playerEn;
+
+    public int moves=0;
     
     
     //public static int gamePlayer = 1;
@@ -76,7 +78,9 @@ public class PlayerController : MonoBehaviour
     public void choseRock()
     {
         weapon = "Rock";
+        moves++;
         FirebaseController.UpdateWeapon("Rock");
+        FirebaseController.UpdateMoves(moves.ToString());
 
         setCharacterSprite(weapon);
         
@@ -91,7 +95,10 @@ public class PlayerController : MonoBehaviour
     public void chosePaper()
     {
         weapon = "Paper";
+        moves++;
         FirebaseController.UpdateWeapon("Paper");
+        FirebaseController.UpdateMoves(moves.ToString());
+
         setCharacterSprite(weapon);
         cm.setStatus("Waiting for other Player");
 
@@ -105,7 +112,10 @@ public class PlayerController : MonoBehaviour
     public void choseScissors()
     {
         weapon = "Scissors";
+        moves++;
         FirebaseController.UpdateWeapon("Scissors");
+        FirebaseController.UpdateMoves(moves.ToString());
+
         setCharacterSprite(weapon);
         cm.setStatus("Waiting for other Player");
 
